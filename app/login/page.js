@@ -2,16 +2,31 @@
 import React from "react";
 import {useRouter} from 'next/navigation';
 import Link from 'next/link';
-import { axios } from 'axios';
+import  axios  from 'axios';
 export default function LoginPage(){
+  const router = useRouter();
+    const [loading,setLoading] = React.useState(false);
     const [user, setUser] = React.useState({
         email:"",
-        password:"",
-        username:"",
+        password:""
+        
     })
 
-    const onLogin =  async ()=>{
+      
 
+    const onLogin =  async ()=>{
+      console.log("we are in on Login")
+      try{
+        setLoading(true);
+       const response = await axios.post("/api/v1/users/login",user);
+       console.log("Login Success",response.date)
+       router.push("/profile");
+      }catch(error){
+        setLoading(true);
+        console.log("Login Faild",error.message);
+      }finally{
+        setLoading(false);
+      }
     }
 
 
@@ -72,7 +87,7 @@ export default function LoginPage(){
               required=""
             />
           </div>
-          <div>
+          {/* <div>
             <label
               htmlFor="confirm-password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -89,7 +104,7 @@ export default function LoginPage(){
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required=""
             />
-          </div>
+          </div> */}
           <div className="flex items-start">
             <div className="flex items-center h-5">
               <input

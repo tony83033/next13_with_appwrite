@@ -1,7 +1,7 @@
 import { connect } from "@/dbconfig/dbConfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
-import { bcryptjs } from "bcryptjs";
+import  bcryptjs  from "bcryptjs";
 
 connect();
 
@@ -11,6 +11,7 @@ export async function POST(req){
         const {email, username, password} = reqBody;
 
         console.log(reqBody);
+        console.log(email)
 
         //Check if user is exist or not
 
